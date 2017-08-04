@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>name.valery1707.smsc</groupId>
+	<artifactId>smsc-parent</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<description>Java library for SMS service https://smsc.ru/api/http/</description>
+	<url>https://github.com/valery1707/smsc-java</url>
+	<inceptionYear>2017</inceptionYear>
+
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>http://opensource.org/licenses/MIT</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<scm>
+		<url>https://github.com/valery1707/smsc-java</url>
+		<connection>scm:git:https://github.com/valery1707/smsc-java</connection>
+		<developerConnection>scm:git|git@github.com:valery1707/smsc-java.git</developerConnection>
+	</scm>
+	<issueManagement>
+		<system>GitHub</system>
+		<url>https://github.com/valery1707/smsc-java</url>
+	</issueManagement>
+
+	<modules>
+		<module>core</module>
+		<module>http</module>
+		<module>http-ok-http</module>
+		<module>json</module>
+		<module>json-jackson</module>
+	</modules>
+
+	<developers>
+		<developer>
+			<name>Valeriy Vyrva</name>
+			<email>valery1707@gmail.com</email>
+			<timezone>+3</timezone>
+			<roles>
+				<role>Founder</role>
+				<role>Developer</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<properties>
+		<project.encoding>UTF-8</project.encoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
+		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<!--Self-->
+			<dependency>
+				<groupId>name.valery1707.smsc</groupId>
+				<artifactId>smsc-http</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>name.valery1707.smsc</groupId>
+				<artifactId>smsc-json</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+
+			<!--Useful annotations-->
+			<dependency>
+				<groupId>com.google.code.findbugs</groupId>
+				<artifactId>jsr305</artifactId>
+				<version>3.0.1</version>
+				<optional>true</optional>
+			</dependency>
+
+			<!--Test-->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.12</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.assertj</groupId>
+				<artifactId>assertj-core</artifactId>
+				<version>${lib.assertj.version}</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+</project>
