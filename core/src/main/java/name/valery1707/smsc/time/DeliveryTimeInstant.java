@@ -2,45 +2,58 @@ package name.valery1707.smsc.time;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.TimeZone;
 
-public class DeliveryTimeInstant extends DeliveryTimeBase {
-	private static final DateFormat FORMAT = new SimpleDateFormat("dd.MM.yy hh:mm");
-	private static final ThreadLocal<DateFormat> FORMAT_SYNC = new ThreadLocal<DateFormat>() {
-		@Override
-		protected DateFormat initialValue() {
-			return (DateFormat) FORMAT.clone();
-		}
-	};
-	private final Date instant;
+import static java.time.LocalDateTime.ofEpochSecond;
 
-	public DeliveryTimeInstant(@Nonnull Date instant, @Nullable TimeZone timeZone) {
+public class DeliveryTimeInstant extends DeliveryTimeBase {
+	/**
+	 * Format: <pre>{@code dd.MM.yy HH:mm}</pre>
+	 */
+	private static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("dd.MM.yy HH:mm", Locale.US);
+
+	private final LocalDateTime instant;
+
+	public DeliveryTimeInstant(@Nonnull LocalDateTime instant, @Nullable TimeZone timeZone) {
 		super(timeZone);
 		this.instant = instant;
 	}
 
-	public DeliveryTimeInstant(Date instant) {
+	public DeliveryTimeInstant(LocalDateTime instant) {
 		this(instant, null);
 	}
 
 	public DeliveryTimeInstant(long unixEpochMillis, @Nullable TimeZone timeZone) {
-		this(new Date(unixEpochMillis), timeZone);
+		this(
+				ofEpochSecond(
+						unixEpochMillis / 1000,
+						(int) (unixEpochMillis % 1000),
+						ZoneOffset.UTC
+				),
+				timeZone
+		);
 	}
 
 	public DeliveryTimeInstant(long unixEpochMillis) {
 		this(unixEpochMillis, null);
 	}
 
-	public Date getInstant() {
+	public LocalDateTime getInstant() {
 		return instant;
+	}
+
+	@Override
+	protected Number zoneOffset() {
+		return super.zoneOffset(getInstant());
 	}
 
 	@Nonnull
 	@Override
 	public String valuePresentation() {
-		return FORMAT_SYNC.get().format(getInstant());
+		return FORMAT.format(getInstant());
 	}
 }
