@@ -20,7 +20,7 @@ public interface Message {
 	String getText();
 
 	@Nullable
-	Boolean transliterate();
+	Transliterate transliterate();
 
 	@Nullable
 	Boolean tinyUrl();
