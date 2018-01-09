@@ -1,6 +1,7 @@
 package name.valery1707.smsc;
 
 import name.valery1707.smsc.error.ServerError;
+import name.valery1707.smsc.template.TemplateManager;
 
 import java.io.IOException;
 
@@ -42,7 +43,7 @@ public class SmsCenterImpl implements SmsCenter {
 
 	@Override
 	public TemplateManager templates() {
-		return null;
+		return new TemplateManager(call("templates.php"));
 	}
 
 	@Override
@@ -55,7 +56,7 @@ public class SmsCenterImpl implements SmsCenter {
 		return this
 				.call("balance.php")
 				.with("cur", "1")
-				.map(Balance.class);
+				.single(Balance.class);
 	}
 
 	@Override

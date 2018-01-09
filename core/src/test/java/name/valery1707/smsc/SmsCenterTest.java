@@ -5,11 +5,19 @@ import org.junit.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SmsCenterTest {
-	private SmsCenter centerDemo() {
+	public static SmsCenter centerDemo() {
 		return new SmsCenterImpl(
 				new HttpClientOkHttp(),
 				new JsonMapperJackson(),
 				"demo", "demo".toCharArray()
+		);
+	}
+
+	public static SmsCenter centerInvalid() {
+		return new SmsCenterImpl(
+				new HttpClientOkHttp(),
+				new JsonMapperJackson(),
+				"demo", "demo1".toCharArray()
 		);
 	}
 

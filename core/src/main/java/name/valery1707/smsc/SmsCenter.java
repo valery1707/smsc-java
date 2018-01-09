@@ -2,10 +2,10 @@ package name.valery1707.smsc;
 
 import name.valery1707.smsc.error.ServerError;
 import name.valery1707.smsc.message.Message;
-import name.valery1707.smsc.message.MessageTemplate;
 import name.valery1707.smsc.phone.Phone;
 import name.valery1707.smsc.phone.PhoneGroup;
 import name.valery1707.smsc.phone.PhoneSingle;
+import name.valery1707.smsc.template.TemplateManager;
 import name.valery1707.smsc.user.User;
 
 import java.io.IOException;
@@ -36,16 +36,6 @@ public interface SmsCenter {
 		void status();
 
 		void delete(Message message);
-	}
-
-	interface TemplateManager {
-		List<MessageTemplate> list();
-
-		void create(MessageTemplate template);
-
-		void update(MessageTemplate template);
-
-		void delete(MessageTemplate template);
 	}
 
 	interface BulkManager {
