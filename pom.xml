@@ -71,7 +71,17 @@
 			</dependency>
 			<dependency>
 				<groupId>name.valery1707.smsc</groupId>
+				<artifactId>smsc-http-ok-http</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>name.valery1707.smsc</groupId>
 				<artifactId>smsc-json</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>name.valery1707.smsc</groupId>
+				<artifactId>smsc-json-jackson</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
 			</dependency>
 
@@ -81,6 +91,20 @@
 				<artifactId>jsr305</artifactId>
 				<version>3.0.1</version>
 				<optional>true</optional>
+			</dependency>
+
+			<!--HTTP-->
+			<dependency>
+				<groupId>com.squareup.okhttp3</groupId>
+				<artifactId>okhttp</artifactId>
+				<version>3.9.1</version>
+			</dependency>
+
+			<!--JSON-->
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>2.9.3</version>
 			</dependency>
 
 			<!--Test-->

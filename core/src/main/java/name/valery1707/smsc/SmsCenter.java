@@ -1,5 +1,6 @@
 package name.valery1707.smsc;
 
+import name.valery1707.smsc.error.ServerError;
 import name.valery1707.smsc.message.Message;
 import name.valery1707.smsc.message.MessageTemplate;
 import name.valery1707.smsc.phone.Phone;
@@ -7,6 +8,7 @@ import name.valery1707.smsc.phone.PhoneGroup;
 import name.valery1707.smsc.phone.PhoneSingle;
 import name.valery1707.smsc.user.User;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -17,7 +19,7 @@ public interface SmsCenter {
 
 	BulkManager bulk();
 
-	Balance balance();
+	Balance balance() throws IOException, ServerError;
 
 	ContactManager contacts();
 

@@ -40,5 +40,15 @@
 			<groupId>org.assertj</groupId>
 			<artifactId>assertj-core</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>name.valery1707.smsc</groupId>
+			<artifactId>smsc-http-ok-http</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>name.valery1707.smsc</groupId>
+			<artifactId>smsc-json-jackson</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 </project>

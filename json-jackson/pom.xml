@@ -21,6 +21,12 @@
 			<artifactId>smsc-json</artifactId>
 		</dependency>
 
+		<!--JSON-->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+
 		<!--Useful annotations-->
 		<dependency>
 			<groupId>com.google.code.findbugs</groupId>

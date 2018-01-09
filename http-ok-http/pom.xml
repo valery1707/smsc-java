@@ -21,6 +21,12 @@
 			<artifactId>smsc-http</artifactId>
 		</dependency>
 
+		<!--HTTP-->
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>okhttp</artifactId>
+		</dependency>
+
 		<!--Useful annotations-->
 		<dependency>
 			<groupId>com.google.code.findbugs</groupId>

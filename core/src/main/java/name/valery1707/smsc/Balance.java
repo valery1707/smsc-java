@@ -2,20 +2,35 @@ package name.valery1707.smsc;
 
 import java.math.BigDecimal;
 
-public class Balance {
-	private final BigDecimal value;
-	private final String currency;
+public class Balance extends ServerErrorResponse {
+	private BigDecimal balance;
+	private BigDecimal credit;
+	private String currency;
 
-	public Balance(BigDecimal value, String currency) {
-		this.value = value;
-		this.currency = currency;
+	public Balance() {
 	}
 
-	public BigDecimal getValue() {
-		return value;
+	public BigDecimal getBalance() {
+		return balance;
+	}
+
+	public void setBalance(BigDecimal balance) {
+		this.balance = balance;
+	}
+
+	public BigDecimal getCredit() {
+		return credit;
+	}
+
+	public void setCredit(BigDecimal credit) {
+		this.credit = credit;
 	}
 
 	public String getCurrency() {
 		return currency;
+	}
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
 	}
 }
