@@ -1,10 +1,9 @@
 package name.valery1707.smsc;
 
+import name.valery1707.smsc.contact.Group;
+import name.valery1707.smsc.contact.Phone;
 import name.valery1707.smsc.error.ServerError;
 import name.valery1707.smsc.message.Message;
-import name.valery1707.smsc.phone.Phone;
-import name.valery1707.smsc.phone.PhoneGroup;
-import name.valery1707.smsc.phone.PhoneSingle;
 import name.valery1707.smsc.template.TemplateManager;
 import name.valery1707.smsc.user.User;
 
@@ -21,7 +20,9 @@ public interface SmsCenter {
 
 	Balance balance() throws IOException, ServerError;
 
-	ContactManager contacts();
+	PhoneManager phones();
+
+	GroupManager groups();
 
 	UserManager users();
 
@@ -41,28 +42,44 @@ public interface SmsCenter {
 	interface BulkManager {
 	}
 
-	interface ContactManager {
-		List<PhoneSingle> listSingle();
+	interface PhoneManager {
+		List<Phone> list() throws IOException, ServerError;
 
-		List<PhoneGroup> listGroup();
+		List<Phone> listByGroup(Group group) throws IOException, ServerError;
 
-		void create(Phone phone);
+		List<Phone> listByPhone(String phone) throws IOException, ServerError;
 
-		void update(PhoneSingle phone, String number);
+		List<Phone> listByFio(String fio) throws IOException, ServerError;
 
-		void update(PhoneGroup phone, String name);
+		List<Phone> search(String search) throws IOException, ServerError;
 
-		void groupAdd(PhoneSingle phone, PhoneGroup group);
+		Long create(Phone phone) throws IOException, ServerError;
 
-		void groupMove(PhoneSingle phone, PhoneGroup group);
+		boolean update(Phone phone) throws IOException, ServerError;
 
-		void groupDelete(PhoneSingle phone, PhoneGroup group);
+		boolean update(Phone phone, String number) throws IOException, ServerError;
 
-		void delete(Phone phone);
+		boolean groupInclude(Phone phone, Group group) throws IOException, ServerError;
 
-		void blackAdd(Phone phone);
+		boolean groupMove(Phone phone, Group group) throws IOException, ServerError;
 
-		void blackDel(Phone phone);
+		boolean groupExclude(Phone phone, Group group) throws IOException, ServerError;
+
+		boolean delete(Phone phone) throws IOException, ServerError;
+
+		void blackInclude(Phone phone) throws IOException, ServerError;
+
+		void blackExclude(Phone phone) throws IOException, ServerError;
+	}
+
+	interface GroupManager {
+		List<Group> list() throws IOException, ServerError;
+
+		Long create(Group group) throws IOException, ServerError;
+
+		boolean update(Group group) throws IOException, ServerError;
+
+		boolean delete(Group group) throws IOException, ServerError;
 	}
 
 	/**

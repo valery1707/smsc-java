@@ -1,5 +1,7 @@
 package name.valery1707.smsc;
 
+import name.valery1707.smsc.contact.GroupManagerImpl;
+import name.valery1707.smsc.contact.PhoneManagerImpl;
 import name.valery1707.smsc.error.ServerError;
 import name.valery1707.smsc.template.TemplateManager;
 
@@ -9,6 +11,7 @@ import static java.util.Objects.requireNonNull;
 import static name.valery1707.smsc.utils.Digests.md5Hex;
 
 public class SmsCenterImpl implements SmsCenter {
+	public static final String DEFAULT_URL = "https://smsc.ru/sys/";
 	private static final int FORMAT_JSON = 3;
 
 	private final String serverUrl;
@@ -17,16 +20,20 @@ public class SmsCenterImpl implements SmsCenter {
 	private final String username;
 	private final String password;
 
-	public SmsCenterImpl(String serverUrl, HttpClient client, JsonMapper mapper, String username, char[] password) {
+	SmsCenterImpl(String serverUrl, HttpClient client, JsonMapper mapper, String username, String hashedPassword) {
 		this.serverUrl = requireNonNull(serverUrl, "serverUrl is null").endsWith("/") ? serverUrl : serverUrl + "/";
 		this.client = requireNonNull(client, "client is null");
 		this.mapper = requireNonNull(mapper, "mapper is null");
 		this.username = requireNonNull(username, "username is null");
-		this.password = md5Hex(requireNonNull(password, "password is null"));
+		this.password = requireNonNull(hashedPassword, "password is null");
 	}
 
-	public SmsCenterImpl(HttpClient client, JsonMapper mapper, String username, char[] password) {
-		this("https://smsc.ru/sys/", client, mapper, username, password);
+	public SmsCenterImpl(String serverUrl, HttpClient client, JsonMapper mapper, String username, char[] clearPassword) {
+		this(serverUrl, client, mapper, username, md5Hex(requireNonNull(clearPassword, "password is null")));
+	}
+
+	public SmsCenterImpl(HttpClient client, JsonMapper mapper, String username, char[] clearPassword) {
+		this(DEFAULT_URL, client, mapper, username, clearPassword);
 	}
 
 	private RequestExecutor call(String url) {
@@ -60,8 +67,13 @@ public class SmsCenterImpl implements SmsCenter {
 	}
 
 	@Override
-	public ContactManager contacts() {
-		return null;
+	public PhoneManager phones() {
+		return new PhoneManagerImpl(call("phones.php"));
+	}
+
+	@Override
+	public GroupManager groups() {
+		return new GroupManagerImpl(call("phones.php"));
 	}
 
 	@Override

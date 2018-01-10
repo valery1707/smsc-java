@@ -21,6 +21,15 @@ public class SmsCenterTest {
 		);
 	}
 
+	public static SmsCenter centerTest() {
+		return new SmsCenterImpl(
+				SmsCenterImpl.DEFAULT_URL,
+				new HttpClientOkHttp(),
+				new JsonMapperJackson(),
+				"test-java-api", "e0bb52c59ce14c76c4107f5e3ce79094"
+		);
+	}
+
 	@Test
 	public void testBalance() throws Exception {
 		Balance balance = centerDemo().balance();

@@ -85,11 +85,13 @@ public class RequestExecutor {
 		}
 	}
 
+	private static final Pattern JSON_ARRAY = Pattern.compile("^\\s*\\[\\s*\\{");
+
 	public <T extends ServerErrorResponse> List<T> multi(Class<T> targetClass)
 			throws IOException, InvalidParameters, InvalidCredentials, LockedIp, UnknownServerError, ToManyRequests, InvalidId, PersistError {
 		String raw = client.execute(url, params);
 		checkError(raw);
-		if (raw.startsWith("[{")) {
+		if (JSON_ARRAY.matcher(raw).find()) {
 			return mapper.multi(raw, targetClass);
 		} else {
 			checkError(mapper.single(raw, ServerErrorResponse.class));
