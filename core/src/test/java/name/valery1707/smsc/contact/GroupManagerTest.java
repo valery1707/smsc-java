@@ -21,7 +21,7 @@ public class GroupManagerTest {
 		List<Group> listBefore = groups.list();
 		assertThat(listBefore)
 				.isNotNull().isNotEmpty()
-				.hasSize(2);//Default groups
+				.size().isPositive();//Default groups
 
 		Long id = groups.create(source);
 		assertThat(id).isNotNull().isPositive();
