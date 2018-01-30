@@ -1,4 +1,6 @@
 package name.valery1707.smsc.contact;
 
-public interface Contact {
+import name.valery1707.smsc.shared.ServerType;
+
+public interface Contact extends ServerType {
 }

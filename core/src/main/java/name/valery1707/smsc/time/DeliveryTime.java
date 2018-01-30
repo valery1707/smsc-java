@@ -8,6 +8,7 @@ import java.util.TimeZone;
 
 import static java.util.TimeZone.getTimeZone;
 
+@SuppressWarnings("SameParameterValue")
 public interface DeliveryTime {
 	TimeZone DEFAULT_ZONE = getTimeZone("Europe/Moscow");
 	int MILLIS_IN_SECOND = 1000;

@@ -1,14 +1,19 @@
 package name.valery1707.smsc;
 
 import name.valery1707.smsc.error.*;
+import name.valery1707.smsc.shared.ServerType;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@SuppressWarnings("WeakerAccess")
 public class RequestExecutor {
 	private final String url;
 	private final HttpClient client;
@@ -21,19 +26,31 @@ public class RequestExecutor {
 		this.mapper = mapper;
 	}
 
-	public RequestExecutor with(String name, String value) {
+	public RequestExecutor with(@Nonnull String name, @Nullable String value) {
 		if (value != null && !value.trim().isEmpty()) {
 			params.put(name, value.trim());
 		}
 		return this;
 	}
 
-	public RequestExecutor with(String name, Number value) {
+	public <T> RequestExecutor with(@Nonnull String name, @Nullable T value, @Nonnull Function<T, String> presenter) {
 		if (value != null) {
-			return with(name, value.toString());
+			return with(name, presenter.apply(value));
 		} else {
 			return this;
 		}
+	}
+
+	public RequestExecutor with(@Nonnull String name, @Nullable Number value) {
+		return with(name, value, Object::toString);
+	}
+
+	public RequestExecutor with(@Nonnull String name, @Nullable Boolean value) {
+		return with(name, value, v -> v ? "1" : "0");
+	}
+
+	public RequestExecutor with(@Nonnull String name, @Nullable ServerType value) {
+		return with(name, value, ServerType::presentation);
 	}
 
 	public <T extends ServerErrorResponse> T single(Class<T> targetClass)

@@ -195,6 +195,11 @@ public class Phone extends ServerErrorResponse implements Contact {
 	}
 
 	@Override
+	public String presentation() {
+		return getPhone();
+	}
+
+	@Override
 	public boolean equals(Object o) {
 		if (this == o) {
 			return true;

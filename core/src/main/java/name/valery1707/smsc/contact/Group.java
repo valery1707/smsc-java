@@ -4,6 +4,8 @@ import name.valery1707.smsc.ServerErrorResponse;
 
 import java.util.Objects;
 
+import static java.util.Objects.requireNonNull;
+
 public class Group extends ServerErrorResponse implements Contact {
 	private Long id;
 	private String name;
@@ -60,6 +62,11 @@ public class Group extends ServerErrorResponse implements Contact {
 	public Group withCnt(String cnt) {
 		setCnt(cnt);
 		return this;
+	}
+
+	@Override
+	public String presentation() {
+		return "G" + requireNonNull(getId(), "Id must be set");
 	}
 
 	@Override

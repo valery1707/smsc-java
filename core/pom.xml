@@ -25,6 +25,12 @@
 			<artifactId>smsc-json</artifactId>
 		</dependency>
 
+		<!--Validation-->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+		</dependency>
+
 		<!--Useful annotations-->
 		<dependency>
 			<groupId>com.google.code.findbugs</groupId>

@@ -1,20 +1,28 @@
 package name.valery1707.smsc.message;
 
-public class CallVoice {
-	public static final CallVoice MALE1 = new CallVoice("m");
-	public static final CallVoice MALE2 = new CallVoice("m2");
-	public static final CallVoice FEMALE1 = new CallVoice("w");
-	public static final CallVoice FEMALE2 = new CallVoice("w2");
-	public static final CallVoice FEMALE3 = new CallVoice("w3");
-	public static final CallVoice FEMALE4 = new CallVoice("w4");
+import name.valery1707.smsc.shared.ServerType;
 
-	private final String code;
+public interface CallVoice extends ServerType {
 
-	public CallVoice(String code) {
-		this.code = code;
-	}
+	enum Known implements CallVoice {
+		MALE1("m"),
+		MALE2("m2"),
+		FEMALE1("w"),
+		FEMALE2("w2"),
+		FEMALE3("w3"),
+		FEMALE4("w4"),
+		//Formatting
+		;
 
-	public String getCode() {
-		return code;
+		private final String presentation;
+
+		Known(String presentation) {
+			this.presentation = presentation;
+		}
+
+		@Override
+		public String presentation() {
+			return presentation;
+		}
 	}
 }

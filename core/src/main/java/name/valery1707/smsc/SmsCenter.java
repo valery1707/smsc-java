@@ -3,7 +3,7 @@ package name.valery1707.smsc;
 import name.valery1707.smsc.contact.Group;
 import name.valery1707.smsc.contact.Phone;
 import name.valery1707.smsc.error.ServerError;
-import name.valery1707.smsc.message.Message;
+import name.valery1707.smsc.message.MessageManager;
 import name.valery1707.smsc.template.TemplateManager;
 import name.valery1707.smsc.user.User;
 
@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface SmsCenter {
-	MessageManager sender();
+	MessageManager messages();
 
 	TemplateManager templates();
 
@@ -25,19 +25,6 @@ public interface SmsCenter {
 	GroupManager groups();
 
 	UserManager users();
-
-	/**
-	 * <a href="https://smsc.ru/api/http/send/#menu">API</a>
-	 */
-	interface MessageManager {
-		void send(Message message);
-
-		void cost(Message message);
-
-		void status();
-
-		void delete(Message message);
-	}
 
 	interface BulkManager {
 	}

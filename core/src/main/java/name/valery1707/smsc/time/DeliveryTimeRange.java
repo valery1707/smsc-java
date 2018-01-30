@@ -1,10 +1,10 @@
 package name.valery1707.smsc.time;
 
-import name.valery1707.smsc.Checker;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.TimeZone;
+
+import static name.valery1707.smsc.Checker.checkRange;
 
 public class DeliveryTimeRange extends DeliveryTimeBase {
 	private final int min;
@@ -12,8 +12,8 @@ public class DeliveryTimeRange extends DeliveryTimeBase {
 
 	public DeliveryTimeRange(int min, int max, @Nullable TimeZone timeZone) {
 		super(timeZone);
-		this.min = Checker.checkRange(min, 0, 23);
-		this.max = Checker.checkRange(max, min, 23);
+		this.min = checkRange(min, 0, 23);
+		this.max = checkRange(max, min, 23);
 	}
 
 	public DeliveryTimeRange(int min, int max) {

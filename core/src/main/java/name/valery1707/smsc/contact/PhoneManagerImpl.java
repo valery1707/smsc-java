@@ -180,11 +180,11 @@ public class PhoneManagerImpl implements SmsCenter.PhoneManager {
 
 	@Override
 	public void blackInclude(Phone phone) throws IOException, ServerError {
-
+		throw new UnsupportedOperationException("Not implemented");
 	}
 
 	@Override
 	public void blackExclude(Phone phone) throws IOException, ServerError {
-
+		throw new UnsupportedOperationException("Not implemented");
 	}
 }

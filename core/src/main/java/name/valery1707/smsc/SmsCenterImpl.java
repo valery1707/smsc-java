@@ -3,6 +3,7 @@ package name.valery1707.smsc;
 import name.valery1707.smsc.contact.GroupManagerImpl;
 import name.valery1707.smsc.contact.PhoneManagerImpl;
 import name.valery1707.smsc.error.ServerError;
+import name.valery1707.smsc.message.MessageManager;
 import name.valery1707.smsc.template.TemplateManager;
 
 import java.io.IOException;
@@ -44,8 +45,8 @@ public class SmsCenterImpl implements SmsCenter {
 	}
 
 	@Override
-	public MessageManager sender() {
-		return null;
+	public MessageManager messages() {
+		return new MessageManager(call("send.php"));
 	}
 
 	@Override
@@ -55,7 +56,7 @@ public class SmsCenterImpl implements SmsCenter {
 
 	@Override
 	public BulkManager bulk() {
-		return null;
+		throw new UnsupportedOperationException("Not implemented");
 	}
 
 	@Override
@@ -78,6 +79,6 @@ public class SmsCenterImpl implements SmsCenter {
 
 	@Override
 	public UserManager users() {
-		return null;
+		throw new UnsupportedOperationException("Not implemented");
 	}
 }

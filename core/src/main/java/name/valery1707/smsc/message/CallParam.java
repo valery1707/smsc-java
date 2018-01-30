@@ -1,8 +1,10 @@
 package name.valery1707.smsc.message;
 
+import name.valery1707.smsc.shared.ServerType;
+
 import static name.valery1707.smsc.Checker.checkRange;
 
-public class CallParam {
+public class CallParam implements ServerType {
 	private final int waitAnswer;
 	private final int repeatInterval;
 	private final int repeatCount;
@@ -25,6 +27,7 @@ public class CallParam {
 		return repeatCount;
 	}
 
+	@Override
 	public String presentation() {
 		return String.format("%d,%d,%d", getWaitAnswer(), getRepeatInterval(), getRepeatCount());
 	}
