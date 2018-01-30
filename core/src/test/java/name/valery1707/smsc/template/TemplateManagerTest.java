@@ -25,7 +25,6 @@ public class TemplateManagerTest {
 	}
 
 	@Test(expected = InvalidCredentials.class)
-	@Ignore
 	public void testListInvalid() throws Exception {
 		List<MessageTemplate> list = centerInvalid().templates().list();
 		assertThat(list).isNotNull().isEmpty();
