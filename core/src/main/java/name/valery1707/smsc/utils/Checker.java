@@ -1,8 +1,7 @@
-package name.valery1707.smsc;
+package name.valery1707.smsc.utils;
 
 import java.io.UnsupportedEncodingException;
 
-//todo Move to utils package
 public class Checker {
 	Checker() {
 		throw new IllegalStateException("Instance must not be created");

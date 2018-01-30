@@ -1,11 +1,11 @@
 package name.valery1707.smsc.message;
 
-import name.valery1707.smsc.ServerErrorResponse;
+import name.valery1707.smsc.shared.ServerBaseResponse;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-public class MessageCost extends ServerErrorResponse {
+public class MessageCost extends ServerBaseResponse {
 	private int cnt;
 	private BigDecimal cost;
 	private List<MessagePhone> phones;

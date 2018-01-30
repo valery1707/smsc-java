@@ -1,4 +1,4 @@
-package name.valery1707.smsc;
+package name.valery1707.smsc.utils;
 
 import org.junit.Test;
 

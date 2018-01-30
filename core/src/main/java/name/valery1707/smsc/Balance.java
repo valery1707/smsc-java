@@ -1,8 +1,10 @@
 package name.valery1707.smsc;
 
+import name.valery1707.smsc.shared.ServerBaseResponse;
+
 import java.math.BigDecimal;
 
-public class Balance extends ServerErrorResponse {
+public class Balance extends ServerBaseResponse {
 	private BigDecimal balance;
 	private BigDecimal credit;
 	private String currency;

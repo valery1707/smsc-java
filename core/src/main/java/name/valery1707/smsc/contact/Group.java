@@ -1,12 +1,12 @@
 package name.valery1707.smsc.contact;
 
-import name.valery1707.smsc.ServerErrorResponse;
+import name.valery1707.smsc.shared.ServerBaseResponse;
 
 import java.util.Objects;
 
 import static java.util.Objects.requireNonNull;
 
-public class Group extends ServerErrorResponse implements Contact {
+public class Group extends ServerBaseResponse implements Contact {
 	private Long id;
 	private String name;
 	private String number;

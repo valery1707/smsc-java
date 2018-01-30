@@ -1,6 +1,6 @@
 package name.valery1707.smsc.message;
 
-import static name.valery1707.smsc.Checker.checkRange;
+import static name.valery1707.smsc.utils.Checker.checkRange;
 
 @SuppressWarnings("WeakerAccess")
 public class Multicast {

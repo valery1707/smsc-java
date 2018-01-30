@@ -1,6 +1,6 @@
-package name.valery1707.smsc;
+package name.valery1707.smsc.shared;
 
-public class ServerErrorResponse {
+public class ServerBaseResponse {
 	private String error;
 	private Integer errorCode;
 

@@ -1,10 +1,10 @@
 package name.valery1707.smsc.message;
 
-import name.valery1707.smsc.ServerErrorResponse;
+import name.valery1707.smsc.shared.ServerBaseResponse;
 
 import java.util.Objects;
 
-public class MessageTemplate extends ServerErrorResponse {
+public class MessageTemplate extends ServerBaseResponse {
 	private Long id;
 	//todo Enum?
 	private String format;

@@ -1,6 +1,6 @@
-package name.valery1707.smsc;
+package name.valery1707.smsc.shared;
 
-public class ResultContainer extends ServerErrorResponse {
+public class ResultContainer extends ServerBaseResponse {
 	private String result;
 
 	public String getResult() {

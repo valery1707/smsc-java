@@ -1,6 +1,7 @@
 package name.valery1707.smsc;
 
 import name.valery1707.smsc.error.*;
+import name.valery1707.smsc.shared.ServerBaseResponse;
 import name.valery1707.smsc.shared.ServerType;
 
 import javax.annotation.Nonnull;
@@ -53,7 +54,7 @@ public class RequestExecutor {
 		return with(name, value, ServerType::presentation);
 	}
 
-	public <T extends ServerErrorResponse> T single(Class<T> targetClass)
+	public <T extends ServerBaseResponse> T single(Class<T> targetClass)
 			throws IOException, InvalidParameters, InvalidCredentials, LockedIp, UnknownServerError, ToManyRequests, InvalidId, PersistError {
 		String raw = client.execute(url, params);
 		checkError(raw);
@@ -73,14 +74,14 @@ public class RequestExecutor {
 			throws ToManyRequests, IOException, LockedIp, InvalidParameters, InvalidCredentials, UnknownServerError, InvalidId, PersistError {
 		Matcher matcher = INLINE_ERROR_FORMAT.matcher(raw);
 		if (matcher.find()) {
-			ServerErrorResponse response = new ServerErrorResponse();
+			ServerBaseResponse response = new ServerBaseResponse();
 			response.setError(matcher.group(2));
 			response.setErrorCode(Integer.parseInt(matcher.group(1)));
 			checkError(response);
 		}
 	}
 
-	private void checkError(ServerErrorResponse response)
+	private void checkError(ServerBaseResponse response)
 			throws IOException, InvalidParameters, InvalidCredentials, LockedIp, UnknownServerError, ToManyRequests, InvalidId, PersistError {
 		if (response.isError()) {
 			switch (response.getErrorCode()) {
@@ -104,14 +105,14 @@ public class RequestExecutor {
 
 	private static final Pattern JSON_ARRAY = Pattern.compile("^\\s*\\[\\s*\\{");
 
-	public <T extends ServerErrorResponse> List<T> multi(Class<T> targetClass)
+	public <T extends ServerBaseResponse> List<T> multi(Class<T> targetClass)
 			throws IOException, InvalidParameters, InvalidCredentials, LockedIp, UnknownServerError, ToManyRequests, InvalidId, PersistError {
 		String raw = client.execute(url, params);
 		checkError(raw);
 		if (JSON_ARRAY.matcher(raw).find()) {
 			return mapper.multi(raw, targetClass);
 		} else {
-			checkError(mapper.single(raw, ServerErrorResponse.class));
+			checkError(mapper.single(raw, ServerBaseResponse.class));
 			throw new UnknownServerError("Invalid response format: " + raw);
 		}
 	}

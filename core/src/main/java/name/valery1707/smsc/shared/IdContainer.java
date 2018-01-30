@@ -1,6 +1,6 @@
-package name.valery1707.smsc;
+package name.valery1707.smsc.shared;
 
-public class IdContainer extends ServerErrorResponse {
+public class IdContainer extends ServerBaseResponse {
 	private Long id;
 
 	public Long getId() {

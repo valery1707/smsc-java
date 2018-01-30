@@ -4,7 +4,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.TimeZone;
 
-import static name.valery1707.smsc.Checker.checkRange;
+import static name.valery1707.smsc.utils.Checker.checkRange;
 
 public class DeliveryTimeRange extends DeliveryTimeBase {
 	private final int min;

@@ -2,7 +2,7 @@ package name.valery1707.smsc.message;
 
 import name.valery1707.smsc.shared.ServerType;
 
-import static name.valery1707.smsc.Checker.checkRange;
+import static name.valery1707.smsc.utils.Checker.checkRange;
 
 public class CallParam implements ServerType {
 	private final int waitAnswer;

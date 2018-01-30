@@ -1,11 +1,11 @@
 package name.valery1707.smsc.contact;
 
-import name.valery1707.smsc.IdContainer;
 import name.valery1707.smsc.RequestExecutor;
-import name.valery1707.smsc.ResultContainer;
 import name.valery1707.smsc.SmsCenter;
 import name.valery1707.smsc.error.InvalidId;
 import name.valery1707.smsc.error.ServerError;
+import name.valery1707.smsc.shared.IdContainer;
+import name.valery1707.smsc.shared.ResultContainer;
 
 import java.io.IOException;
 import java.util.List;

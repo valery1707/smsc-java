@@ -1,6 +1,6 @@
 package name.valery1707.smsc.contact;
 
-import name.valery1707.smsc.ServerErrorResponse;
+import name.valery1707.smsc.shared.ServerBaseResponse;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,7 +11,7 @@ import static java.util.Collections.emptyList;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
-public class Phone extends ServerErrorResponse implements Contact {
+public class Phone extends ServerBaseResponse implements Contact {
 	private Long id;
 	private String name;
 	private String phone;

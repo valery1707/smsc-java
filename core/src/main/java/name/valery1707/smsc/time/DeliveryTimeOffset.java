@@ -2,7 +2,7 @@ package name.valery1707.smsc.time;
 
 import javax.annotation.Nonnull;
 
-import static name.valery1707.smsc.Checker.checkRange;
+import static name.valery1707.smsc.utils.Checker.checkRange;
 
 public class DeliveryTimeOffset extends DeliveryTimeBase {
 	private final int offset;

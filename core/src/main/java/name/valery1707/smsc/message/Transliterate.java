@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 import java.net.URLEncoder;
 import java.util.function.Function;
 
-import static name.valery1707.smsc.Checker.safeEncoding;
+import static name.valery1707.smsc.utils.Checker.safeEncoding;
 
 public interface Transliterate extends ServerType {
 	String encode(@Nullable String message);
