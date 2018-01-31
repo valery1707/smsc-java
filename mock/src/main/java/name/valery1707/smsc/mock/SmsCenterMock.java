@@ -107,13 +107,13 @@ public class SmsCenterMock {
 		}
 	}
 
-	public int getPort() {
+	public int port() {
 		return server.port();
 	}
 
-	public URL getUrl() {
+	public URL url() {
 		try {
-			return new URL(url.getProtocol(), "localhost", getPort(), url.getFile());
+			return new URL(url.getProtocol(), "localhost", port(), url.getFile());
 		} catch (MalformedURLException e) {
 			throw new IllegalStateException("Can not build mock URL", e);
 		}

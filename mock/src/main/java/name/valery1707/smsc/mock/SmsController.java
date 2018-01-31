@@ -1,6 +1,7 @@
 package name.valery1707.smsc.mock;
 
 import name.valery1707.smsc.mock.balance.BalanceController;
+import name.valery1707.smsc.mock.message.MessageController;
 import spark.Route;
 
 public interface SmsController extends Route {
@@ -13,7 +14,7 @@ public interface SmsController extends Route {
 	 */
 	enum Implementations {
 		BALANCE(new BalanceController()),
-//		MESSAGE(new MessageController()),
+		MESSAGE(new MessageController()),
 		//Formatting
 		;
 		private final SmsController controller;
