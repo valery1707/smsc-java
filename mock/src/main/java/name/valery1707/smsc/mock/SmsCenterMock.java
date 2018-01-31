@@ -40,7 +40,7 @@ public class SmsCenterMock {
 					.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
 					.create();
 
-			//Authorization
+			server.before("/*", checkRequiredParams(gson, "login", "psw"));
 			server.before("/*", authorization(gson));
 
 			//Processing
@@ -76,6 +76,21 @@ public class SmsCenterMock {
 					//noinspection ThrowableNotThrown
 					server.halt(HttpServletResponse.SC_OK, gson.toJson(error));
 				}
+			}
+		};
+	}
+
+	private Filter checkRequiredParams(Gson gson, String... required) {
+		return (request, response) -> {
+			HashMap<String, String> params = BaseController.extractParams(request);
+			List<String> notFound = new ArrayList<>(Arrays.asList(required));
+			notFound.removeAll(params.keySet());
+			if (!notFound.isEmpty()) {
+				ServerBaseResponse error = new ServerBaseResponse();
+				error.setErrorCode(1);
+				error.setError("Required parameters: " + notFound.toString());
+				//noinspection ThrowableNotThrown
+				server.halt(HttpServletResponse.SC_OK, gson.toJson(error));
 			}
 		};
 	}

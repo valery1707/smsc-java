@@ -2,8 +2,11 @@ package name.valery1707.smsc.mock;
 
 import name.valery1707.smsc.HttpClientOkHttp;
 import name.valery1707.smsc.JsonMapperJackson;
+import name.valery1707.smsc.RequestExecutor;
 import name.valery1707.smsc.SmsCenterImpl;
 import name.valery1707.smsc.error.InvalidCredentials;
+import name.valery1707.smsc.error.InvalidParameters;
+import name.valery1707.smsc.shared.ServerBaseResponse;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,6 +32,15 @@ public class SmsCenterMockTest {
 	@After
 	public void tearDown() throws Exception {
 		server.stop();
+	}
+
+	@Test(expected = InvalidParameters.class)
+	public void testGlobalRequiredParams() throws Exception {
+		new RequestExecutor(
+				server.getUrl().toExternalForm() + "/balance.php",
+				new HttpClientOkHttp(), new JsonMapperJackson()
+		)
+				.single(ServerBaseResponse.class);
 	}
 
 	@Test

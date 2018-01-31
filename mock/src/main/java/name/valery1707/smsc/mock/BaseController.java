@@ -26,11 +26,14 @@ public abstract class BaseController implements SmsController {
 	public static HashMap<String, String> extractParams(Request request) {
 		HashMap<String, String> params = new HashMap<>();
 		if (request.requestMethod().toLowerCase().equals("post")) {
-			for (String nameAndValuePair : request.body().split("&")) {
-				String[] pair = nameAndValuePair.split("=");
-				String name = pair[0];
-				String value = pair[1];
-				params.put(name, value);
+			String body = request.body().trim();
+			if (!body.isEmpty()) {
+				for (String nameAndValuePair : body.split("&")) {
+					String[] pair = nameAndValuePair.split("=");
+					String name = pair[0];
+					String value = pair[1];
+					params.put(name, value);
+				}
 			}
 		} else {
 			params.putAll(request.params());
