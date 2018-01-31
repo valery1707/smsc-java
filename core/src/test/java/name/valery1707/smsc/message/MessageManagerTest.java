@@ -15,7 +15,7 @@ import static name.valery1707.smsc.SmsCenterTest.centerTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MessageManagerTest {
-	private static final Phone PHONE = new Phone().withPhone("79051234567");
+	private static final Phone PHONE = Contact.phone("79051234567");
 	private static final String MESSAGE = "Test Java Sender";
 
 	private static void checkCost(MessageCost cost, boolean testMode, Contact... contacts) {

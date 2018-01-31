@@ -31,6 +31,19 @@ public class SmsCenterTest {
 	}
 
 	@Test
+	public void testClearPassword() throws Exception {
+		char[] password = "password".toCharArray();
+		SmsCenterImpl center = new SmsCenterImpl(
+				SmsCenterImpl.DEFAULT_URL,
+				new HttpClientOkHttp(),
+				new JsonMapperJackson(),
+				"demo", password
+		);
+		assertThat(center).isNotNull();
+		assertThat(password).containsOnly('\u0000');
+	}
+
+	@Test
 	public void testBalance() throws Exception {
 		Balance balance = centerDemo().balance();
 		assertThat(balance).isNotNull();
