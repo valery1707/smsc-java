@@ -36,7 +36,8 @@ public class Message {
 	private List<Contact> contacts = new ArrayList<>();
 	@Size(max = 800)
 	private String text;
-	private ServerCharset charset;
+	@NotNull
+	private ServerCharset charset = ServerCharset.Known.UTF8;
 	@NotNull
 	private MessageType type = MessageType.Known.SMS;
 	@MatchesPattern(ID_REGEXP)
@@ -95,7 +96,7 @@ public class Message {
 	}
 
 	public void setCharset(ServerCharset charset) {
-		this.charset = charset;
+		this.charset = requireNonNull(charset, "Charset must be set");
 	}
 
 	public Message withCharset(ServerCharset charset) {
