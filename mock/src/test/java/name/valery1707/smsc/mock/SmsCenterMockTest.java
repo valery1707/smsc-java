@@ -1,14 +1,12 @@
 package name.valery1707.smsc.mock;
 
-import name.valery1707.smsc.HttpClientOkHttp;
-import name.valery1707.smsc.JsonMapperJackson;
-import name.valery1707.smsc.RequestExecutor;
-import name.valery1707.smsc.SmsCenterImpl;
+import name.valery1707.smsc.*;
 import name.valery1707.smsc.contact.Contact;
 import name.valery1707.smsc.error.InvalidCredentials;
 import name.valery1707.smsc.error.InvalidParameters;
 import name.valery1707.smsc.message.Message;
 import name.valery1707.smsc.message.MessageCost;
+import name.valery1707.smsc.message.MessageSend;
 import name.valery1707.smsc.shared.ServerBaseResponse;
 import org.junit.After;
 import org.junit.Before;
@@ -90,5 +88,23 @@ public class SmsCenterMockTest {
 		assertThat(cost.getCnt()).isEqualTo(message.getContacts().size());
 		assertThat(cost.getCost()).isPositive();
 		assertThat(cost.getPhones()).hasSameSizeAs(message.getContacts());
+	}
+
+	@Test
+	public void testMessageSend1() throws Exception {
+		Balance balanceBefore = client.balance();
+
+		Message message = new Message()
+				.withContact(Contact.phone("79051234567"))
+				.withText("Test");
+		MessageSend send = client.messages().send(message);
+		assertThat(send).isNotNull();
+		assertThat(send.getCnt()).isEqualTo(message.getContacts().size());
+		assertThat(send.getCost()).isPositive();
+		assertThat(send.getPhones()).hasSameSizeAs(message.getContacts());
+		assertThat(send.getBalance()).isPositive();
+
+		Balance balanceAfter = client.balance();
+		assertThat(balanceAfter.getBalance()).isLessThan(balanceBefore.getBalance()).isEqualByComparingTo(balanceBefore.getBalance().subtract(send.getCost()));
 	}
 }

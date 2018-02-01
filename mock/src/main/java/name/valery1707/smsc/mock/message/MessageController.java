@@ -3,10 +3,13 @@ package name.valery1707.smsc.mock.message;
 import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
+import name.valery1707.smsc.Balance;
 import name.valery1707.smsc.error.InvalidParameters;
 import name.valery1707.smsc.error.ServerError;
 import name.valery1707.smsc.message.MessageCost;
 import name.valery1707.smsc.message.MessagePhone;
+import name.valery1707.smsc.message.MessageSend;
+import name.valery1707.smsc.message.MessageSendPhone;
 import name.valery1707.smsc.mock.BaseController;
 import spark.Request;
 import spark.Response;
@@ -46,7 +49,7 @@ public class MessageController extends BaseController<MessageCost> {
 		}
 		LinkedHashMap<PhoneNumber, BigDecimal> costByPhone = phones.stream().collect(toMap(identity(), database()::price, (a, b) -> a, LinkedHashMap::new));
 		BigDecimal costTotal = costByPhone.values().stream().reduce(BigDecimal.ZERO, BigDecimal::add);
-		boolean isCost = params.containsKey("cost");
+		boolean isCost = params.getOrDefault("cost", "0").equals("1");
 		if (isCost) {
 			MessageCost cost = new MessageCost();
 			cost.setCnt(phones.size());
@@ -64,7 +67,25 @@ public class MessageController extends BaseController<MessageCost> {
 			);
 			return cost;
 		} else {
-			return null;
+			MessageSend send = new MessageSend();
+			send.setCnt(phones.size());
+			send.setCost(costTotal);
+			send.setPhones(costByPhone.entrySet()
+					.stream()
+					.map(e -> {
+						MessageSendPhone phone = new MessageSendPhone();
+						phone.setPhone(phoneNumberUtil.format(e.getKey(), PhoneNumberUtil.PhoneNumberFormat.E164).replace("+", ""));
+						phone.setCost(e.getValue());
+						phone.setMccmnc("253");//todo More correct value
+						phone.setStatus("");
+						return phone;
+					})
+					.collect(toList())
+			);
+			Balance balance = database().balance(params.get("login"));
+			balance.setBalance(balance.getBalance().subtract(costTotal));
+			send.setBalance(balance.getBalance());
+			return send;
 		}
 	}
 
