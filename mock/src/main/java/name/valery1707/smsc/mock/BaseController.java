@@ -5,6 +5,8 @@ import name.valery1707.smsc.shared.ServerBaseResponse;
 import spark.Request;
 import spark.Response;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.HashMap;
 
 public abstract class BaseController<R extends ServerBaseResponse> implements SmsController {
@@ -54,7 +56,7 @@ public abstract class BaseController<R extends ServerBaseResponse> implements Sm
 	public static HashMap<String, String> extractParams(Request request) {
 		HashMap<String, String> params = new HashMap<>();
 		if (request.requestMethod().toLowerCase().equals("post")) {
-			String body = request.body().trim();
+			String body = urlDecode(request.body().trim());
 			if (!body.isEmpty()) {
 				for (String nameAndValuePair : body.split("&")) {
 					String[] pair = nameAndValuePair.split("=");
@@ -67,6 +69,14 @@ public abstract class BaseController<R extends ServerBaseResponse> implements Sm
 			params.putAll(request.params());
 		}
 		return params;
+	}
+
+	private static String urlDecode(String source) {
+		try {
+			return URLDecoder.decode(source, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			throw new IllegalStateException(e);
+		}
 	}
 
 	protected abstract R handle(HashMap<String, String> params, Request request, Response response) throws ServerError;

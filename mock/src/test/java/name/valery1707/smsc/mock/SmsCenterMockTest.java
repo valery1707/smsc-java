@@ -64,11 +64,20 @@ public class SmsCenterMockTest {
 	}
 
 	@Test(expected = InvalidParameters.class)
-	public void testMessageParams_contact() throws Exception {
+	public void testMessageParams_contact_invalid() throws Exception {
 		Message message = new Message()
 				.withContact(Contact.phone("790512"))
 				.withText("Test");
 		client.messages().cost(message);
+	}
+
+	@Test
+	public void testMessageParams_contact_formatted() throws Exception {
+		Message message = new Message()
+				.withContact(Contact.phone("+7 905 123-45-67"))
+				.withText("Test");
+		MessageCost cost = client.messages().cost(message);
+		assertThat(cost).isNotNull();
 	}
 
 	@Test
