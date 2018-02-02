@@ -59,6 +59,10 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
 
+		<github.tag></github.tag>
+		<github.releaseName></github.releaseName>
+		<github.description></github.description>
+
 		<lib.assertj.version>3.9.0</lib.assertj.version>
 	</properties>
 
@@ -89,6 +93,11 @@
 				<groupId>name.valery1707.smsc</groupId>
 				<artifactId>smsc-json-jackson</artifactId>
 				<version>0.1.2-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>name.valery1707.smsc</groupId>
+				<artifactId>smsc-mock</artifactId>
+				<version>0.1.1-SNAPSHOT</version>
 			</dependency>
 
 			<!--Validation-->
@@ -168,4 +177,123 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<version>2.5</version>
+				<configuration>
+					<generateBackupPoms>false</generateBackupPoms>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<profile>
+			<!--http://central.sonatype.org/pages/apache-maven.html-->
+			<id>release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<version>3.0.1</version>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<version>3.0.0</version>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>1.6</version>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<artifactId>maven-deploy-plugin</artifactId>
+						<version>2.8.2</version>
+						<configuration>
+							<skip>true</skip>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.sonatype.plugins</groupId>
+						<artifactId>nexus-staging-maven-plugin</artifactId>
+						<version>1.6.8</version>
+						<extensions>true</extensions>
+						<configuration>
+							<serverId>oss.sonatype.org</serverId>
+							<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+							<description>${project.version}</description>
+						</configuration>
+						<executions>
+							<execution>
+								<id>deploy-to-sonatype</id>
+								<phase>deploy</phase>
+								<goals>
+									<goal>deploy</goal>
+									<goal>release</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+
+					<plugin>
+						<groupId>de.jutzig</groupId>
+						<artifactId>github-release-plugin</artifactId>
+						<version>1.2.0</version>
+						<configuration>
+							<serverId>github</serverId>
+							<description>${github.description}</description>
+							<releaseName>${github.releaseName}</releaseName>
+							<tag>${github.tag}</tag>
+							<fileSets>
+								<fileSet>
+									<directory>${project.basedir}</directory>
+									<includes>
+										<include>**/smsc-*.jar</include>
+										<include>**/smsc-*.pom</include>
+										<include>**/smsc-*.asc</include>
+									</includes>
+									<excludes>
+										<exclude>**/smsc-*-test-*.*</exclude>
+									</excludes>
+								</fileSet>
+							</fileSets>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
