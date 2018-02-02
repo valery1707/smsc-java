@@ -27,6 +27,7 @@ if [ "${changelog_l}" -lt "0" ] ; then
   changelog_l=0
 fi
 changelog=$(cat CHANGELOG.md | tail --lines=+${changelog_s} | head --lines=${changelog_l})
+changelog_len=${#changelog}
 
 gpg_pass=$(cat ../settings.xml | grep 'gpg.passphrase' | grep --only-matching '>.*<' | cut -c 2- | rev | cut -c 2- | rev)
 
@@ -55,7 +56,9 @@ echo "SSH config:"
 cat ~/.ssh/config
 
 # Update version
-sed --in-place "s/# SNAPSHOT/# SNAPSHOT\n\n# ${version}/g" CHANGELOG.md
+if [ "${changelog_len}" -gt "0" ] ; then
+  sed --in-place "s/# SNAPSHOT/# SNAPSHOT\n\n# ${version}/g" CHANGELOG.md
+fi
 mvn --batch-mode versions:set "-DnewVersion=${version}"
 
 # Build and sign
