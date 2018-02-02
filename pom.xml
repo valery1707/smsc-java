@@ -6,7 +6,7 @@
 
 	<groupId>name.valery1707.smsc</groupId>
 	<artifactId>smsc-parent</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.0</version>
 	<packaging>pom</packaging>
 
 	<description>Java library for SMS service https://smsc.ru/api/http/</description>
@@ -68,27 +68,27 @@
 			<dependency>
 				<groupId>name.valery1707.smsc</groupId>
 				<artifactId>smsc</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>0.1.0</version>
 			</dependency>
 			<dependency>
 				<groupId>name.valery1707.smsc</groupId>
 				<artifactId>smsc-http</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>0.1.0</version>
 			</dependency>
 			<dependency>
 				<groupId>name.valery1707.smsc</groupId>
 				<artifactId>smsc-http-ok-http</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>0.1.0</version>
 			</dependency>
 			<dependency>
 				<groupId>name.valery1707.smsc</groupId>
 				<artifactId>smsc-json</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>0.1.0</version>
 			</dependency>
 			<dependency>
 				<groupId>name.valery1707.smsc</groupId>
 				<artifactId>smsc-json-jackson</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>0.1.0</version>
 			</dependency>
 
 			<!--Validation-->
