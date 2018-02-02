@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Force exit on execution errors
+set -e
+
 version=${tag}
 # Release version
 if [ "${version}" = "" ] ; then

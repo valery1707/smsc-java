@@ -2,7 +2,7 @@ Change log for releases.
 
 # SNAPSHOT
 
-# 0.1.2
+# 0.1.0
 
 * Design API
 * Balance: implement
