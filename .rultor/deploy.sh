@@ -78,6 +78,7 @@ unset old_email
 
 # Deploy artifact to Maven Central
 mvn --batch-mode deploy -P release -Dmaven.test.skip=true -Dgpg.passphrase=${gpg_pass} --settings ../settings.xml
+rm -rf target/nexus-staging
 
 # Next development iteration
 mvn --batch-mode versions:set "-DnewVersion=${next}-SNAPSHOT"
