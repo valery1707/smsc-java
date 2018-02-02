@@ -2,6 +2,8 @@ Change log for releases.
 
 # SNAPSHOT
 
+# 0.1.2
+
 * Design API
 * Balance: implement
 * Template: Implement all methods
