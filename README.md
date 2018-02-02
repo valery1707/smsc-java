@@ -1,3 +1,10 @@
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/name.valery1707.smsc/smsc/badge.svg)](https://maven-badges.herokuapp.com/maven-central/name.valery1707.smsc/smsc)
+[![Javadoc](https://javadoc.io/badge/name.valery1707.smsc/smsc.svg)](http://www.javadoc.io/doc/name.valery1707.smsc/smsc)
+[![License](https://img.shields.io/github/license/valery1707/smsc-java.svg)](http://opensource.org/licenses/MIT)
+
+[![Stories to work on](https://badge.waffle.io/valery1707/smsc-java.svg?label=next&title=Ready%20to%20work)](https://waffle.io/valery1707/smsc-java)
+[![DevOps By Rultor.com](http://www.rultor.com/b/valery1707/sms-java)](http://www.rultor.com/p/valery1707/sms-java)
+
 # smsc-java
 Java library for [SMSC](https://smsc.ru/api/http/).
 
