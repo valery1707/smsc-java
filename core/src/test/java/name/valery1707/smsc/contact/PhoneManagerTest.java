@@ -55,7 +55,7 @@ public class PhoneManagerTest {
 		assertThat(id).isNotNull().isPositive();
 
 		//List: After create
-		Thread.sleep(10_000);
+		Thread.sleep(15_000);
 		List<Phone> listAfterCreate = phones.list();
 		assertThat(listAfterCreate)
 				.hasOnlyElementsOfType(Phone.class)
@@ -97,6 +97,7 @@ public class PhoneManagerTest {
 		assertThat(phones.update(source)).isTrue();
 
 		//List: After update full
+		Thread.sleep(15_000);
 		List<Phone> listAfterUpdate1 = phones
 				.listByPhone(source.getPhone());
 		assertThat(listAfterUpdate1)
@@ -123,9 +124,11 @@ public class PhoneManagerTest {
 		assertThat(updated1.getPhoneOther()).isEqualTo(source.getPhoneOther());
 
 		//Update: number
+		Thread.sleep(15_000);
 		assertThat(phones.update(updated1, "79050533678")).isTrue();
 
 		//List: After update number
+		Thread.sleep(15_000);
 		List<Phone> listAfterUpdate2 = phones
 				.listByFio(source.getLastName());
 		assertThat(listAfterUpdate2)
@@ -177,6 +180,7 @@ public class PhoneManagerTest {
 		Group group4 = groupById.get(groupIds.get(3));
 
 		//Groups: Use
+		Thread.sleep(15_000);
 		assertThat(phones.groupInclude(updated2, group1)).isTrue();
 		assertThat(phones.groupMove(updated2, group2)).isTrue();
 		assertThat(phones.groupInclude(updated2, group3)).isTrue();
@@ -184,7 +188,7 @@ public class PhoneManagerTest {
 		assertThat(phones.groupExclude(updated2, group4)).isTrue();
 
 		//Groups: Test
-		Thread.sleep(10_000);
+		Thread.sleep(15_000);
 		List<Phone> listInGroup3 = phones.listByGroup(group3);
 		assertThat(listInGroup3)
 				.isNotNull()
@@ -211,9 +215,10 @@ public class PhoneManagerTest {
 		assertThat(deleted).isTrue();
 
 		//Create: With groups
+		Thread.sleep(15_000);
 		id = phones.create(source.withGroupIds(group1.getId(), group2.getId()));
 		assertThat(id).isNotNull().isPositive();
-		Thread.sleep(10_000);
+		Thread.sleep(15_000);
 		List<Phone> listInGroup1 = phones.listByGroup(group1);
 		assertThat(listInGroup1).isNotNull().isNotEmpty().hasSize(1);
 		assertThat(listInGroup1.get(0).getGroupIds()).isNotNull().isNotEmpty().containsOnly(group1.getId(), group2.getId());
@@ -222,16 +227,16 @@ public class PhoneManagerTest {
 		for (Group group : groupIds.stream().map(groupById::get).collect(toList())) {
 			assertThat(groups.delete(group)).isTrue();
 		}
-		Thread.sleep(10_000);
+		Thread.sleep(15_000);
 		assertThat(phones.listByGroup(group2)).isNotNull().isEmpty();
 
-		Thread.sleep(10_000);
+		Thread.sleep(15_000);
 		assertThat(phones.search("server has empty list")).containsOnlyElementsOf(listBefore);
 
 		//List: empty lists
-		Thread.sleep(10_000);
+		Thread.sleep(15_000);
 		assertThat(phones.listByPhone("77014541882")).isNotNull().isEmpty();
-		Thread.sleep(10_000);
+		Thread.sleep(15_000);
 		assertThat(phones.listByFio(source.getFirstName())).isNotNull().isEmpty();
 	}
 }
