@@ -60,9 +60,9 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
 
-		<github.tag></github.tag>
-		<github.releaseName></github.releaseName>
-		<github.description></github.description>
+		<github.tag/>
+		<github.releaseName/>
+		<github.description/>
 
 		<lib.assertj.version>3.9.0</lib.assertj.version>
 	</properties>
@@ -138,7 +138,7 @@
 			<dependency>
 				<groupId>com.fasterxml.jackson.core</groupId>
 				<artifactId>jackson-databind</artifactId>
-				<version>2.9.3</version>
+				<version>2.10.0.pr1</version>
 			</dependency>
 			<dependency>
 				<groupId>com.google.code.gson</groupId>
