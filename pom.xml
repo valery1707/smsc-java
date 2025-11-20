@@ -60,9 +60,9 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
 
-		<github.tag></github.tag>
-		<github.releaseName></github.releaseName>
-		<github.description></github.description>
+		<github.tag/>
+		<github.releaseName/>
+		<github.description/>
 
 		<lib.assertj.version>3.9.0</lib.assertj.version>
 	</properties>
@@ -116,7 +116,7 @@
 			<dependency>
 				<groupId>com.squareup.okhttp3</groupId>
 				<artifactId>okhttp</artifactId>
-				<version>3.9.1</version>
+				<version>4.9.2</version>
 			</dependency>
 			<dependency>
 				<groupId>com.sparkjava</groupId>
